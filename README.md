@@ -1,16 +1,18 @@
 # org_management
 
-A new Flutter project.
+A new project that could be used for organization for GTARP 
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project currently stores and displays actions of an organization. It is setup for a variety of activities available on nopixel.
+The goal of this project was to create something that could be used by an organization to track activities and members.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+The base dashboard displaying all activities.
+![Alt text](assets/readme/all_item_dashboard.png?raw=true "Dashboard")
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Dashboard to display specific activities.
+![Alt text](assets/readme/weed_item_dashboard.png?raw=true "Weed Dashboard")
+
+An example of creating a new action.
+![Alt text](assets/readme/create_action.png?raw=true "Create New Action")
