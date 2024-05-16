@@ -88,7 +88,7 @@ class Organization extends Equatable {
 
   static List<Organization> orgSampleData = [
     Organization(
-      id: '123',
+      id: 'S6IFMVGBXghqaQ2lTF74Y9fpinr2',
       name: 'Cypranos',
       members: Member.getMemberSameple(),
       ranks: const [

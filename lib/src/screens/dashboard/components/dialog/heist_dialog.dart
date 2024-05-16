@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
 import 'package:org_management/constants.dart';
-import 'package:org_management/src/blocs/cubit/dialog_cubit.dart';
+import 'package:org_management/src/blocs/dialog/dialog_cubit.dart';
 import 'package:org_management/src/blocs/dashboard/dashboard_bloc.dart';
 import 'package:org_management/src/screens/dashboard/components/dialog/dialog_text_field.dart';
 import 'package:uuid/uuid.dart';

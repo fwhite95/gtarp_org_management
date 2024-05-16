@@ -60,11 +60,11 @@ class DashboardScreen extends StatelessWidget {
       return SafeArea(
         child: SingleChildScrollView(
           primary: false,
-          padding: EdgeInsets.all(defaultPadding),
+          padding: const EdgeInsets.all(defaultPadding),
           child: Column(
             children: [
-              Header(),
-              SizedBox(
+              const Header(),
+              const SizedBox(
                 height: defaultPadding,
               ),
               Row(
@@ -74,8 +74,8 @@ class DashboardScreen extends StatelessWidget {
                     flex: 5,
                     child: Column(
                       children: [
-                        ButtonRow(),
-                        SizedBox(
+                        const ButtonRow(),
+                        const SizedBox(
                           height: defaultPadding,
                         ),
                         getItemsDashboard(state.status, state),

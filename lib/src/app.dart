@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:org_management/constants.dart';
-import 'package:org_management/src/blocs/cubit/dialog_cubit.dart';
+import 'package:org_management/src/blocs/auth/auth_cubit.dart';
+import 'package:org_management/src/blocs/dialog/dialog_cubit.dart';
 import 'package:org_management/src/blocs/dashboard/dashboard_bloc.dart';
 import 'package:org_management/src/navigator/app_router.dart';
+import 'package:org_management/src/repositories/auth_repository.dart';
 import 'package:org_management/src/repositories/cleaning_repository.dart';
 import 'package:org_management/src/repositories/heist_repository.dart';
 import 'package:org_management/src/repositories/moonshine_repository.dart';
@@ -20,6 +22,7 @@ class MyApp extends StatelessWidget {
     required this.theftRepository,
     required this.cleaningRepository,
     required this.organizationRepository,
+    required this.authRepository,
     super.key,
   });
 
@@ -29,6 +32,7 @@ class MyApp extends StatelessWidget {
   final TheftRepository theftRepository;
   final CleaningRepository cleaningRepository;
   final OrganizationRepository organizationRepository;
+  final AuthRepository authRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +44,7 @@ class MyApp extends StatelessWidget {
         RepositoryProvider.value(value: theftRepository),
         RepositoryProvider.value(value: cleaningRepository),
         RepositoryProvider.value(value: organizationRepository),
+        RepositoryProvider.value(value: authRepository),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -56,6 +61,10 @@ class MyApp extends StatelessWidget {
           BlocProvider(
               create: (context) => DialogCubit(
                     weedRepository: context.read<WeedRepository>(),
+                  )),
+          BlocProvider(
+              create: (context) => AuthCubit(
+                    authRepository: context.read<AuthRepository>(),
                   )),
         ],
         child: MaterialApp.router(
