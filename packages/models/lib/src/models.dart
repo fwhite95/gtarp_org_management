@@ -5,5 +5,5 @@ export 'moonshine_activity.dart';
 export 'theft_activity.dart';
 export 'member.dart';
 export 'weed_activity.dart';
-export 'crime_actions.dart';
+export 'crime_action.dart';
 export 'organization.dart';

@@ -69,21 +69,17 @@ class HeistItems extends StatelessWidget {
 DataRow recentFileDataRow(HeistActivity crime, BuildContext context) {
   return DataRow(
     cells: [
-      DataCell(
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-              child: Text(crime.name),
-            ),
-          ],
-        ),
-      ),
+      DataCell(Text(crime.name)),
       DataCell(Text(crime.rank)),
       DataCell(
           Text('${crime.date.month}/${crime.date.day}/${crime.date.year}')),
       DataCell(Text(crime.money)),
-      DataCell(Text(crime.people.toString())),
+      DataCell(
+        Text(
+          crime.people.toString(),
+          maxLines: 2,
+        ),
+      ),
       DataCell(Text(crime.percentage)),
       DataCell(
         const Icon(Icons.delete),

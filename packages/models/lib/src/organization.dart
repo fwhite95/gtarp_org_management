@@ -6,7 +6,7 @@ class Organization extends Equatable {
   final String name;
   final List<Member> members;
   final List<String> ranks;
-  final List<CrimeActions> crimeActions;
+  final List<CrimeAction> crimeActions;
 
   const Organization({
     required this.id,
@@ -21,7 +21,7 @@ class Organization extends Equatable {
     String? name,
     List<Member>? members,
     List<String>? ranks,
-    List<CrimeActions>? crimeActions,
+    List<CrimeAction>? crimeActions,
   }) {
     return Organization(
       id: id ?? this.id,
@@ -43,9 +43,9 @@ class Organization extends Equatable {
       rankList.add(r);
     }
 
-    List<CrimeActions> crimeActionList = [];
+    List<CrimeAction> crimeActionList = [];
     for (Map<String, dynamic> c in json['crimeActions']) {
-      crimeActionList.add(CrimeActions.fromJson(c));
+      crimeActionList.add(CrimeAction.fromJson(c));
     }
 
     return Organization(
@@ -64,7 +64,7 @@ class Organization extends Equatable {
     }
 
     final crimeActionList = [];
-    for (CrimeActions c in crimeActions) {
+    for (CrimeAction c in crimeActions) {
       crimeActionList.add(c.toJson());
     }
 
@@ -88,7 +88,7 @@ class Organization extends Equatable {
 
   static List<Organization> orgSampleData = [
     Organization(
-      id: 'S6IFMVGBXghqaQ2lTF74Y9fpinr2',
+      id: 'YNOzPInJtURUjhCluLS4PwUBK4Q2',
       name: 'Cypranos',
       members: Member.getMemberSameple(),
       ranks: const [
@@ -102,7 +102,7 @@ class Organization extends Equatable {
         'Underboss',
         'Don',
       ],
-      crimeActions: CrimeActions.crimeActionsSampleData,
+      crimeActions: CrimeAction.crimeActionsSampleData,
     ),
   ];
 }

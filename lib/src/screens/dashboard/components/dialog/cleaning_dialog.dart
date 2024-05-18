@@ -302,7 +302,7 @@ class _CleaningAlertDialogState extends State<CleaningAlertDialog> {
                   date: DateTime.now(),
                   produced: state.money,
                   people: state.people,
-                  percentage: '',
+                  percentage: Data.getPercentage(context, state.cleaningAction),
                   money: state.money,
                 );
                 print(cleaningActivity);

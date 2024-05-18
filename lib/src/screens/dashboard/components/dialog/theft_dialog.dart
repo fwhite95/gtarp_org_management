@@ -316,7 +316,7 @@ class _TheftAlertDialogState extends State<TheftAlertDialog> {
                   produced: state.money,
                   objects: state.objects,
                   people: state.people,
-                  percentage: '',
+                  percentage: Data.getPercentage(context, state.theftAction),
                   money: state.money,
                 );
                 print(theftActivity);

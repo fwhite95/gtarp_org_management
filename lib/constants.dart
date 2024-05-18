@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
+import 'package:org_management/src/blocs/dashboard/dashboard_bloc.dart';
 
 const primaryColor = Color(0xFF2697FF);
 const secondaryColor = Color(0xFF2A2D3E);
@@ -9,60 +11,26 @@ const defaultPadding = 16.0;
 
 class Data {
   static List<String> getActions(Organization org, String crime) {
-    switch (crime) {
-      case 'Weed':
-        final CrimeActions crimeActions =
-            org.crimeActions.firstWhere((value) => value.crime == crime);
-        List<String> list = [];
-
-        for (String action in crimeActions.actions) {
-          list.add('$crime: $action');
-        }
-
-        return list;
-      case 'Moonshine':
-        final CrimeActions crimeActions =
-            org.crimeActions.firstWhere((value) => value.crime == crime);
-        List<String> list = [];
-
-        for (String action in crimeActions.actions) {
-          list.add('$crime: $action');
-        }
-
-        return list;
-      case 'Heist':
-        final CrimeActions crimeActions =
-            org.crimeActions.firstWhere((value) => value.crime == crime);
-        List<String> list = [];
-
-        for (String action in crimeActions.actions) {
-          list.add('$crime: $action');
-        }
-
-        return list;
-      case 'Theft':
-        final CrimeActions crimeActions =
-            org.crimeActions.firstWhere((value) => value.crime == crime);
-        List<String> list = [];
-
-        for (String action in crimeActions.actions) {
-          list.add('$crime: $action');
-        }
-
-        return list;
-      case 'Cleaning':
-        final CrimeActions crimeActions =
-            org.crimeActions.firstWhere((value) => value.crime == crime);
-        List<String> list = [];
-
-        for (String action in crimeActions.actions) {
-          list.add('$crime: $action');
-        }
-
-        return list;
-      default:
-        return [];
+    List<String> list = [];
+    for (CrimeAction c in org.crimeActions) {
+      if (c.crime == crime) {
+        list.add('${c.crime}: ${c.action}');
+      }
     }
+
+    return list;
+  }
+
+  static String getPercentage(BuildContext context, String weedAction) {
+    int percentage = 0;
+    for (final c
+        in context.read<DashboardBloc>().state.organization.crimeActions) {
+      String name = '${c.crime}: ${c.action}';
+      if (name == weedAction) {
+        percentage = c.percentage;
+      }
+    }
+    return percentage.toString();
   }
 
   static List<String> ranks = [

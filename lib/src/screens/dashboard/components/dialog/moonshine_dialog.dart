@@ -308,7 +308,8 @@ class _MoonshineAlertDialogState extends State<MoonshineAlertDialog> {
                   produced: state.bottles,
                   bottles: state.bottles,
                   people: state.people,
-                  percentage: '',
+                  percentage:
+                      Data.getPercentage(context, state.moonshineAction),
                   money: state.money,
                 );
                 print(moonshineActivity);

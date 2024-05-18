@@ -69,16 +69,7 @@ class CleaningItems extends StatelessWidget {
 DataRow itemsDataRow(CleaningActivity crime, BuildContext context) {
   return DataRow(
     cells: [
-      DataCell(
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-              child: Text(crime.name),
-            ),
-          ],
-        ),
-      ),
+      DataCell(Text(crime.name)),
       DataCell(Text(crime.rank)),
       DataCell(
           Text('${crime.date.month}/${crime.date.day}/${crime.date.year}')),

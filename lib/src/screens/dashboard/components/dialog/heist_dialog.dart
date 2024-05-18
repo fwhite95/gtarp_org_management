@@ -302,7 +302,7 @@ class _HeistAlertDialogState extends State<HeistAlertDialog> {
                   date: DateTime.now(),
                   produced: state.money,
                   people: state.people,
-                  percentage: '',
+                  percentage: Data.getPercentage(context, state.heistAction),
                   money: state.money,
                 );
                 print(heistActivity);
