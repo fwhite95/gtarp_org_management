@@ -58,8 +58,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     emit(state.copyWith(status: DashboardStatus.loading));
 
     try {
-      await _organizationRepository
-          .createOrganization(Organization.orgSampleData.first);
+      // await _organizationRepository
+      //     .createOrganization(Organization.orgSampleData.first);
       final organzation = await _organizationRepository
           .getOrganization('YNOzPInJtURUjhCluLS4PwUBK4Q2');
 

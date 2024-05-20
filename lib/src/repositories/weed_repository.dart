@@ -25,6 +25,16 @@ class WeedRepository {
     return listWeedActivity;
   }
 
+  Future<List<WeedActivity>> getWeedActivitiesPayWeek(String orgId) async {
+    final query = await _weedAPI.getWeedPayWeekData(orgId);
+    final list = query.docs;
+    List<WeedActivity> listWeedActivity = [];
+    for (final q in list) {
+      listWeedActivity.add(WeedActivity.fromJson(q.data()));
+    }
+    return listWeedActivity;
+  }
+
   Future createWeedActivity(String orgId, WeedActivity weedActivity) async {
     await _weedAPI.createWeedData(orgId, weedActivity);
   }

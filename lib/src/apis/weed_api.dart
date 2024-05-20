@@ -7,6 +7,7 @@ abstract class IWeedAPI {
   Future getWeedData(String orgId, String id);
   Future updateWeedData(String orgId, WeedActivity weedActivity);
   Future deleteWeedData(String orgId, String id);
+  Future getWeedPayWeekData(String orgId);
 }
 
 class WeedAPI implements IWeedAPI {
@@ -77,5 +78,25 @@ class WeedAPI implements IWeedAPI {
     } catch (e) {
       print(e);
     }
+  }
+
+  @override
+  Future<QuerySnapshot<Map<String, dynamic>>> getWeedPayWeekData(String orgId) async {
+    DateTime now = DateTime.now();
+    DateTime start =
+        DateTime(now.year, now.month, now.day - (now.weekday % 5) - 7);
+    DateTime end = DateTime(now.year, now.month, start.day + 7);
+
+    print('start: $start');
+    print('end: $end');
+
+    final collection = _firestore
+        .collection('organization')
+        .doc(orgId)
+        .collection('Weed')
+        .where('date', isGreaterThan: start)
+        .where('date', isLessThan: end);
+
+    return collection.get();
   }
 }

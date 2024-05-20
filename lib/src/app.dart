@@ -5,6 +5,7 @@ import 'package:org_management/constants.dart';
 import 'package:org_management/src/blocs/auth/auth_cubit.dart';
 import 'package:org_management/src/blocs/dialog/dialog_cubit.dart';
 import 'package:org_management/src/blocs/dashboard/dashboard_bloc.dart';
+import 'package:org_management/src/blocs/weed_stats/weed_stats_bloc.dart';
 import 'package:org_management/src/navigator/app_router.dart';
 import 'package:org_management/src/repositories/auth_repository.dart';
 import 'package:org_management/src/repositories/cleaning_repository.dart';
@@ -57,6 +58,12 @@ class MyApp extends StatelessWidget {
               cleaningRepository: context.read<CleaningRepository>(),
               organizationRepository: context.read<OrganizationRepository>(),
             )..add(const DashboardLoadEvent()),
+          ),
+          BlocProvider(
+            create: (context) => WeedStatsBloc(
+              weedRepository: context.read<WeedRepository>(),
+              organizationRepository: context.read<OrganizationRepository>(),
+            ),
           ),
           BlocProvider(
               create: (context) => DialogCubit(
