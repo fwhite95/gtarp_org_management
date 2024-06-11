@@ -75,7 +75,7 @@ class _ButtonRowState extends State<ButtonRow> {
                 context.read<DashboardBloc>().add(DashboardLoadWeed(crime));
               },
               icon: const Icon(Icons.forest),
-              label: const Text("Weed"),
+              label: const Text("Farming"),
             ),
             // Moonshine
             ElevatedButton.icon(
@@ -92,7 +92,7 @@ class _ButtonRowState extends State<ButtonRow> {
                     .add(DashboardLoadMoonshine(crime));
               },
               icon: const Icon(Icons.local_drink),
-              label: const Text("Moonshine"),
+              label: const Text("Cooking"),
             ),
             // Theft
             ElevatedButton.icon(
@@ -107,7 +107,7 @@ class _ButtonRowState extends State<ButtonRow> {
                 context.read<DashboardBloc>().add(DashboardLoadTheft(crime));
               },
               icon: const Icon(Icons.radio),
-              label: const Text("Theft"),
+              label: const Text("Mechanic"),
             ),
             // Heist
             ElevatedButton.icon(
@@ -122,7 +122,7 @@ class _ButtonRowState extends State<ButtonRow> {
                 context.read<DashboardBloc>().add(DashboardLoadHeist(crime));
               },
               icon: const Icon(Icons.money),
-              label: const Text("Heist"),
+              label: const Text("Collections"),
             ),
             // Cleaning
             ElevatedButton.icon(

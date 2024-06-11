@@ -75,6 +75,7 @@ class MyApp extends StatelessWidget {
                   )),
         ],
         child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
           title: 'Org Management',
           theme: ThemeData.dark().copyWith(
             scaffoldBackgroundColor: bgColor,

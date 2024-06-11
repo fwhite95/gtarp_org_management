@@ -32,32 +32,63 @@ class WeedStatsBloc extends Bloc<WeedStatsEvent, WeedStatsState> {
 
       final weedActivities =
           await _weedRepository.getWeedActivitiesPayWeek(event.orgId);
-      print('weedActivities: $weedActivities');
+      //print('weedActivities: $weedActivities');
 
       // Functions to get rest of stats for WeedStatsState
       // dirtyEarned
       double dirtyEarned = 0;
       double totalKickback = 0;
+      double totalGrossProfit = 0;
+
       for (final a in weedActivities) {
-        dirtyEarned += double.parse(a.money);
-        
-        double percentage =
-            double.parse(a.percentage == '' ? '0' : a.percentage);
-        if (percentage != 0) {
-          totalKickback += (double.parse(a.money) * (percentage / 100));
+        dirtyEarned += a.money.isEmpty ? 0 : double.parse(a.money);
+
+        double percentage = a.percentage == '' ? 0 : double.parse(a.percentage);
+        if (percentage != 0.0) {
+          totalKickback += double.parse(a.money) * (percentage / 100);
         }
       }
 
-      print(dirtyEarned.toString());
-      print(totalKickback.toString());
+      List<Map<String, dynamic>> sellersList = [];
+      for (final a in weedActivities) {
+        // {name: '' ,'money': 6700, 'bags': 100}
+        if (a.activity == 'Weed: Sell') {
+          Map<String, dynamic> seller = {};
+          seller.addAll({
+            'name': a.name,
+            'money': int.parse(a.money),
+            'bags': int.parse(a.bags)
+          });
+
+          if (sellersList.any((o) => o['name'] == seller['name'])) {
+            for (int i = 0; i < sellersList.length; i++) {
+              if (sellersList[i]['name'] == seller['name']) {
+                sellersList[i]['money'] += seller['money'];
+                sellersList[i]['bags'] += seller['bags'];
+              }
+            }
+          } else {
+            sellersList.add(seller);
+          }
+        }
+      }
+      print(sellersList);
+
+      totalGrossProfit = dirtyEarned - totalKickback;
+      //print(dirtyEarned.toString());
+      //print(totalKickback.toString());
 
       emit(state.copyWith(
         status: WeedStatsStatus.payWeek,
         organization: organzation,
         activities: weedActivities,
+        totalDirtyEarned: dirtyEarned.toString(),
+        totalKickback: totalKickback.toString(),
+        totalGrossProfit: totalGrossProfit.toString(),
+        sellersList: sellersList,
       ));
     } catch (e) {
-      print('onLoadPayWeek: $e');
+      print('onLoadPayWeek: ${e.toString()}');
       emit(state.copyWith(status: WeedStatsStatus.error));
     }
   }

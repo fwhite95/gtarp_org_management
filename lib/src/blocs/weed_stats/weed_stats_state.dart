@@ -28,6 +28,7 @@ class WeedStatsState extends Equatable {
     this.kickbackFromActivity = const [],
     this.bagsGrown = '',
     this.bagsDistributed = '',
+    this.sellersList = const [],
   });
 
   final WeedStatsStatus status;
@@ -43,6 +44,8 @@ class WeedStatsState extends Equatable {
   final String bagsGrown;
   final String bagsDistributed;
 
+  final List<Map<String, dynamic>> sellersList;
+
   WeedStatsState copyWith({
     WeedStatsStatus? status,
     List<WeedActivity>? activities,
@@ -54,6 +57,7 @@ class WeedStatsState extends Equatable {
     List<Map<String, dynamic>>? kickbackFromActivity,
     String? bagsGrown,
     String? bagsDistributed,
+    List<Map<String, dynamic>>? sellersList,
   }) {
     return WeedStatsState(
       status: status ?? this.status,
@@ -66,6 +70,7 @@ class WeedStatsState extends Equatable {
       kickbackFromActivity: kickbackFromActivity ?? this.kickbackFromActivity,
       bagsGrown: bagsGrown ?? this.bagsGrown,
       bagsDistributed: bagsDistributed ?? this.bagsDistributed,
+      sellersList: sellersList ?? this.sellersList,
     );
   }
 
@@ -81,5 +86,6 @@ class WeedStatsState extends Equatable {
         kickbackFromActivity,
         bagsGrown,
         bagsDistributed,
+        sellersList,
       ];
 }
