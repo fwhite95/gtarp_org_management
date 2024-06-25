@@ -25,7 +25,6 @@ class WeedStatsBloc extends Bloc<WeedStatsEvent, WeedStatsState> {
     Emitter<WeedStatsState> emit,
   ) async {
     emit(state.copyWith(status: WeedStatsStatus.loading));
-
     try {
       final organzation =
           await _organizationRepository.getOrganization(event.orgId);

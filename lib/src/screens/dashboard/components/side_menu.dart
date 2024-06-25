@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:org_management/src/blocs/auth/auth_cubit.dart';
 import 'package:org_management/src/blocs/weed_stats/weed_stats_bloc.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         children: [
-          DrawerHeader(
+          const DrawerHeader(
             child: Icon(Icons.start),
           ),
           DrawerListTile(
@@ -26,11 +27,12 @@ class SideMenu extends StatelessWidget {
             },
           ),
           DrawerListTile(
-            title: 'Weed',
+            title: 'Farming',
             icon: Icons.payment,
             press: () {
-              context.read<WeedStatsBloc>().add(const WeedStatsLoadPayWeekEvent(
-                    'YNOzPInJtURUjhCluLS4PwUBK4Q2',
+              String uid = context.read<AuthCubit>().state.uid;
+              context.read<WeedStatsBloc>().add(WeedStatsLoadPayWeekEvent(
+                    uid,
                   ));
               context.goNamed(
                 'weed_stats',
@@ -38,23 +40,28 @@ class SideMenu extends StatelessWidget {
             },
           ),
           DrawerListTile(
-            title: 'Moonshine',
+            title: 'Cooking',
             icon: Icons.task,
             press: () {},
           ),
           DrawerListTile(
-            title: 'Theft',
+            title: 'Mechanic',
             icon: Icons.document_scanner,
             press: () {},
           ),
           DrawerListTile(
-            title: 'Heist',
+            title: 'Collection',
             icon: Icons.money,
             press: () {},
           ),
           DrawerListTile(
             title: 'Cleaning',
             icon: Icons.cleaning_services_outlined,
+            press: () {},
+          ),
+          DrawerListTile(
+            title: 'Admin',
+            icon: Icons.admin_panel_settings,
             press: () {},
           ),
         ],
@@ -65,11 +72,11 @@ class SideMenu extends StatelessWidget {
 
 class DrawerListTile extends StatelessWidget {
   const DrawerListTile({
-    Key? key,
+    super.key,
     required this.title,
     required this.press,
     required this.icon,
-  }) : super(key: key);
+  });
 
   final String title;
   final IconData icon;

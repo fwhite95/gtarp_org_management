@@ -57,7 +57,8 @@ class MyApp extends StatelessWidget {
               theftRepository: context.read<TheftRepository>(),
               cleaningRepository: context.read<CleaningRepository>(),
               organizationRepository: context.read<OrganizationRepository>(),
-            )..add(const DashboardLoadEvent()),
+            ),
+            //..add(const DashboardLoadEvent()),
           ),
           BlocProvider(
             create: (context) => WeedStatsBloc(

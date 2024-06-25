@@ -8,7 +8,14 @@ abstract class DashboardEvent extends Equatable {
 }
 
 class DashboardLoadEvent extends DashboardEvent {
-  const DashboardLoadEvent();
+  const DashboardLoadEvent(this.orgId);
+
+  final String orgId;
+
+  @override
+  List<Object> get props => [
+        orgId,
+      ];
 }
 
 class DashboardLoadWeed extends DashboardEvent {
