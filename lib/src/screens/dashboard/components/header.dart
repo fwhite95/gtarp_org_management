@@ -61,8 +61,8 @@ class ExportButton extends StatelessWidget {
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +85,7 @@ class ProfileCard extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-            child: Text('Freddie'),
+            child: Text(context.read<DashboardBloc>().state.organization.name),
           ),
           Icon(Icons.keyboard_arrow_down),
         ],
