@@ -43,7 +43,6 @@ void main() async {
   final organizationRepository =
       OrganizationRepository(organizationAPI: organizationAPI);
   final authRepository = AuthRepository(authAPI: authAPI);
-
   runApp(MyApp(
     weedRepository: weedRepository,
     moonshineRepository: moonshineRepository,

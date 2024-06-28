@@ -30,8 +30,14 @@ class OrganizationAPI implements IOrganizatonAPI {
 
   @override
   Future<DocumentSnapshot> getOrganizationData(String uid) async {
-    final document = _firestore.collection('organization').doc(uid);
-    return document.get();
+    DocumentReference<Map<String, dynamic>> document;
+    try {
+      document = _firestore.collection('organization').doc(uid);
+      return document.get();
+    } catch (e) {
+      print('getOrganizationData API: $e');
+      rethrow;
+    }
   }
 
   @override
