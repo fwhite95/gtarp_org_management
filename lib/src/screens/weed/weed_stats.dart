@@ -58,7 +58,7 @@ class WeedStats extends StatelessWidget {
                   padding: const EdgeInsets.all(10.0),
                   child: Container(
                     decoration: BoxDecoration(
-                        color: bgColor,
+                        color: secondaryColor,
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(

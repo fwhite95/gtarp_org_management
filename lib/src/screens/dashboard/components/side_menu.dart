@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:org_management/src/blocs/admin/admin_bloc.dart';
 import 'package:org_management/src/blocs/auth/auth_cubit.dart';
+import 'package:org_management/src/blocs/dashboard/dashboard_bloc.dart';
 import 'package:org_management/src/blocs/weed_stats/weed_stats_bloc.dart';
 
 class SideMenu extends StatelessWidget {
@@ -62,7 +64,14 @@ class SideMenu extends StatelessWidget {
           DrawerListTile(
             title: 'Admin',
             icon: Icons.admin_panel_settings,
-            press: () {},
+            press: () {
+              context.read<AdminBloc>().add(AdminLoadEvent(
+                    context.read<DashboardBloc>().state.organization,
+                  ));
+              context.goNamed(
+                'admin',
+              );
+            },
           ),
         ],
       ),

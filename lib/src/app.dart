@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:org_management/constants.dart';
+import 'package:org_management/src/blocs/admin/admin_bloc.dart';
 import 'package:org_management/src/blocs/auth/auth_cubit.dart';
 import 'package:org_management/src/blocs/dialog/dialog_cubit.dart';
 import 'package:org_management/src/blocs/dashboard/dashboard_bloc.dart';
@@ -72,6 +73,11 @@ class MyApp extends StatelessWidget {
           BlocProvider(
               create: (context) => AuthCubit(
                     authRepository: context.read<AuthRepository>(),
+                  )),
+          BlocProvider(
+              create: (context) => AdminBloc(
+                    organizationRepository:
+                        context.read<OrganizationRepository>(),
                   )),
         ],
         child: MaterialApp.router(

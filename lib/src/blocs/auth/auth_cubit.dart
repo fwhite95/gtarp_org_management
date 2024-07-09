@@ -23,6 +23,7 @@ class AuthCubit extends Cubit<AuthState> {
     print('email: ${state.email}, password: ${state.password}');
     try {
       final user = await _authRepository.signIn(state.email, state.password);
+      print('user: $user');
       emit(state.copyWith(uid: user.uid, status: AuthStatus.authenticated));
     } catch (e) {
       print('Auth cubit: $e');
