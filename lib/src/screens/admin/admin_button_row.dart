@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:org_management/constants.dart';
 import 'package:org_management/src/blocs/admin/admin_bloc.dart';
-import 'package:org_management/src/blocs/auth/auth_cubit.dart';
 import 'package:org_management/src/blocs/dashboard/dashboard_bloc.dart';
 
 class AdminButtonRow extends StatefulWidget {
@@ -67,15 +66,9 @@ class _AdminButtonRowState extends State<AdminButtonRow> {
               ),
               onPressed: () {
                 selection = 'Ranks';
-                // context
-                //     .read<AdminBloc>()
-                //     .add(AdminLoadEvent(context.read<AuthCubit>().state.uid));
+
                 context.read<AdminBloc>().add(AdminLoadRanks(
                     context.read<DashboardBloc>().state.organization));
-
-                // context
-                //     .read<AdminBloc>()
-                //     .add(AdminLoadMembers('YNOzPInJtURUjhCluLS4PwUBK4Q2'));
               },
               icon: const Icon(Icons.people),
               label: const Text("Ranks"),

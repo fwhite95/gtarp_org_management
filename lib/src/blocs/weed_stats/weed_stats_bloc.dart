@@ -26,11 +26,15 @@ class WeedStatsBloc extends Bloc<WeedStatsEvent, WeedStatsState> {
   ) async {
     emit(state.copyWith(status: WeedStatsStatus.loading));
     try {
-      final organzation =
-          await _organizationRepository.getOrganization(event.orgId);
+      // final organzation =
+      //     await _organizationRepository.getOrganization(event.orgId);
+      final organzation = await _organizationRepository
+          .getOrganization('YNOzPInJtURUjhCluLS4PwUBK4Q2');
 
-      final weedActivities =
-          await _weedRepository.getWeedActivitiesPayWeek(event.orgId);
+      // final weedActivities =
+      //     await _weedRepository.getWeedActivitiesPayWeek(event.orgId);
+      final weedActivities = await _weedRepository
+          .getWeedActivitiesPayWeek('YNOzPInJtURUjhCluLS4PwUBK4Q2');
       //print('weedActivities: $weedActivities');
 
       // Functions to get rest of stats for WeedStatsState

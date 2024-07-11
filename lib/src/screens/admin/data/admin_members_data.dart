@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:models/models.dart';
 import 'package:org_management/constants.dart';
+import 'package:org_management/src/screens/admin/dialog/admin_member_dialog.dart';
 
-class AdminMembersData extends StatelessWidget {
+class AdminMembersData extends StatefulWidget {
   const AdminMembersData({
     required this.members,
     super.key,
@@ -10,6 +11,11 @@ class AdminMembersData extends StatelessWidget {
 
   final List<Member> members;
 
+  @override
+  State<AdminMembersData> createState() => _AdminMembersDataState();
+}
+
+class _AdminMembersDataState extends State<AdminMembersData> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,9 +50,9 @@ class AdminMembersData extends StatelessWidget {
                 ),
               ],
               rows: List.generate(
-                members.length,
-                (index) => itemsDataRow(members[index]),
-              ),
+                  widget.members.length,
+                  (index) =>
+                      itemsDataRow(widget.members[index], context, index)),
             ),
           ),
         ],
@@ -54,9 +60,8 @@ class AdminMembersData extends StatelessWidget {
     );
   }
 
-  DataRow itemsDataRow(Member member) {
-    TextEditingController controller = TextEditingController();
-    controller.text = member.name;
+  DataRow itemsDataRow(Member member, BuildContext context, int index) {
+    TextEditingController controller = TextEditingController(text: member.name);
     return DataRow(
       cells: [
         DataCell(
@@ -65,14 +70,6 @@ class AdminMembersData extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
                 child: Text(member.name),
-                // child: TextField(
-                //   controller: controller,
-                //   decoration: InputDecoration(
-                //     constraints: BoxConstraints.tightFor(
-                //       width: 175,
-                //     ),
-                //   ),
-                // ),
               ),
             ],
           ),
@@ -80,7 +77,17 @@ class AdminMembersData extends StatelessWidget {
         DataCell(Text(member.rank)),
         DataCell(
           const Icon(Icons.edit),
-          onTap: () {},
+          onTap: () {
+            showDialog<String>(
+                context: context,
+                builder: (BuildContext context) {
+                  return AdminMemberDialog(
+                    member: member,
+                    nameController: controller,
+                    index: index,
+                  );
+                });
+          },
         ),
         DataCell(
           const Icon(Icons.delete),
@@ -90,16 +97,3 @@ class AdminMembersData extends StatelessWidget {
     );
   }
 }
-
-List<Member> testMembers = [
-  const Member(
-    id: '1234',
-    name: 'Lang Buddha',
-    rank: 'Don',
-  ),
-  const Member(
-    id: '4567',
-    name: 'Clark Mason',
-    rank: 'Captain',
-  ),
-];

@@ -19,10 +19,12 @@ class AdminState extends Equatable {
       ranks: [],
       crimeActions: [],
     ),
+    this.index,
   });
 
   final AdminStatus status;
   final Organization organization;
+  final int? index;
 
   AdminState copyWith({
     AdminStatus? status,

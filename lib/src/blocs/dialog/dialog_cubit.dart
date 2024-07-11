@@ -15,6 +15,10 @@ class DialogCubit extends Cubit<DialogState> {
     emit(state.copyWith(name: value, status: DialogStatus.initial));
   }
 
+  void nameReset(String value) {
+    emit(state.copyWith(name: value, status: DialogStatus.initial));
+  }
+
   void rankChanged(String value) {
     emit(state.copyWith(rank: value, status: DialogStatus.initial));
   }

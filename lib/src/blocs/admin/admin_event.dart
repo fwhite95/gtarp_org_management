@@ -46,3 +46,18 @@ class AdminLoadActions extends AdminEvent {
         organization,
       ];
 }
+
+class AdminSaveMemberEvent extends AdminEvent {
+  const AdminSaveMemberEvent(
+    this.member,
+    this.index,
+  );
+  final Member member;
+  final int index;
+
+  @override
+  List<Object> get props => [
+        member,
+        index,
+      ];
+}

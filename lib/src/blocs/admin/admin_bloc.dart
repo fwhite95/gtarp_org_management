@@ -17,6 +17,7 @@ class AdminBloc extends Bloc<AdminEvent, AdminState> {
     on<AdminLoadMembers>(_onLoadMembers);
     on<AdminLoadRanks>(_onLoadRanks);
     on<AdminLoadActions>(_onLoadActions);
+    on<AdminSaveMemberEvent>(_onSaveMember);
   }
 
   Future<void> _onLoadEvent(
@@ -80,6 +81,26 @@ class AdminBloc extends Bloc<AdminEvent, AdminState> {
       emit(state.copyWith(
         status: AdminStatus.actions,
         organization: event.organization,
+      ));
+    } catch (e) {
+      print('AdminBloc error: $e');
+      emit(state.copyWith(status: AdminStatus.error));
+    }
+  }
+
+  Future<void> _onSaveMember(
+    AdminSaveMemberEvent event,
+    Emitter<AdminState> emit,
+  ) async {
+    emit(state.copyWith(status: AdminStatus.loading));
+
+    try {
+      state.organization.members[event.index] = event.member;
+      await _organizationRepository.updateOrganization(state.organization);
+
+      emit(state.copyWith(
+        status: AdminStatus.members,
+        organization: state.organization,
       ));
     } catch (e) {
       print('AdminBloc error: $e');
