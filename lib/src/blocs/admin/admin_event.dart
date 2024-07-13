@@ -18,18 +18,18 @@ class AdminLoadEvent extends AdminEvent {
 }
 
 class AdminLoadMembers extends AdminEvent {
-  const AdminLoadMembers(this.organization);
+  const AdminLoadMembers(this.organization, this.selection);
   final Organization organization;
+  final String selection;
 
   @override
-  List<Object> get props => [
-        organization,
-      ];
+  List<Object> get props => [organization, selection];
 }
 
 class AdminLoadRanks extends AdminEvent {
-  const AdminLoadRanks(this.organization);
+  const AdminLoadRanks(this.organization, this.selection);
   final Organization organization;
+  final String selection;
 
   @override
   List<Object> get props => [
@@ -38,8 +38,9 @@ class AdminLoadRanks extends AdminEvent {
 }
 
 class AdminLoadActions extends AdminEvent {
-  const AdminLoadActions(this.organization);
+  const AdminLoadActions(this.organization, this.selection);
   final Organization organization;
+  final String selection;
 
   @override
   List<Object> get props => [
@@ -59,5 +60,44 @@ class AdminSaveMemberEvent extends AdminEvent {
   List<Object> get props => [
         member,
         index,
+      ];
+}
+
+class AdminCreateMemberEvent extends AdminEvent {
+  const AdminCreateMemberEvent(
+    this.member,
+  );
+  final Member member;
+
+  @override
+  List<Object> get props => [
+        member,
+      ];
+}
+
+class AdminSaveRankEvent extends AdminEvent {
+  const AdminSaveRankEvent(
+    this.rank,
+    this.index,
+  );
+  final String rank;
+  final int index;
+
+  @override
+  List<Object> get props => [
+        rank,
+        index,
+      ];
+}
+
+class AdminCreateRankEvent extends AdminEvent {
+  const AdminCreateRankEvent(
+    this.rank,
+  );
+  final String rank;
+
+  @override
+  List<Object> get props => [
+        rank,
       ];
 }

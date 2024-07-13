@@ -19,20 +19,24 @@ class AdminState extends Equatable {
       ranks: [],
       crimeActions: [],
     ),
+    this.selection = 'Members',
     this.index,
   });
 
   final AdminStatus status;
   final Organization organization;
   final int? index;
+  final String selection;
 
   AdminState copyWith({
     AdminStatus? status,
     Organization? organization,
+    String? selection,
   }) {
     return AdminState(
       status: status ?? this.status,
       organization: organization ?? this.organization,
+      selection: selection ?? this.selection,
     );
   }
 
@@ -40,5 +44,6 @@ class AdminState extends Equatable {
   List<Object> get props => [
         status,
         organization,
+        selection,
       ];
 }

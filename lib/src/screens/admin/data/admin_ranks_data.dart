@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:org_management/constants.dart';
+import 'package:org_management/src/screens/admin/dialog/admin_rank_dialog.dart';
 
 class AdminRanksData extends StatelessWidget {
   const AdminRanksData({
@@ -41,7 +42,7 @@ class AdminRanksData extends StatelessWidget {
               ],
               rows: List.generate(
                 ranks.length,
-                (index) => itemsDataRow(ranks[index]),
+                (index) => itemsDataRow(ranks[index], context, index),
               ),
             ),
           ),
@@ -50,7 +51,8 @@ class AdminRanksData extends StatelessWidget {
     );
   }
 
-  DataRow itemsDataRow(String rank) {
+  DataRow itemsDataRow(String rank, BuildContext context, int index) {
+    TextEditingController controller = TextEditingController(text: rank);
     return DataRow(
       cells: [
         DataCell(
@@ -63,10 +65,19 @@ class AdminRanksData extends StatelessWidget {
             ],
           ),
         ),
-        //DataCell(Text(member.rank)),
         DataCell(
           const Icon(Icons.edit),
-          onTap: () {},
+          onTap: () {
+            showDialog<String>(
+                context: context,
+                builder: (BuildContext context) {
+                  return AdminRankDialog(
+                    rank: rank,
+                    rankController: controller,
+                    index: index,
+                  );
+                });
+          },
         ),
         DataCell(
           const Icon(Icons.delete),
@@ -76,8 +87,3 @@ class AdminRanksData extends StatelessWidget {
     );
   }
 }
-
-List<String> testRanks = [
-  'Don',
-  'Captain',
-];

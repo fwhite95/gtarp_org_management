@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
+import 'package:org_management/src/blocs/admin/admin_bloc.dart';
 import 'package:org_management/src/blocs/dashboard/dashboard_bloc.dart';
+import 'package:org_management/src/screens/admin/dialog/admin_create_member_dialog.dart';
+import 'package:org_management/src/screens/admin/dialog/admin_create_rank_dialog.dart';
 import 'package:org_management/src/screens/dashboard/components/dialog/cleaning_dialog.dart';
 import 'package:org_management/src/screens/dashboard/components/dialog/heist_dialog.dart';
 import 'package:org_management/src/screens/dashboard/components/dialog/moonshine_dialog.dart';
@@ -60,6 +63,26 @@ getDialog(BuildContext context, Organization org) {
         uuid: uuid,
         organization: org,
       );
+    default:
+      return;
+  }
+}
+
+getAdminDialog(BuildContext context,) {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController rankController = TextEditingController();
+  final String selection = context.read<AdminBloc>().state.selection;
+
+  switch (selection) {
+    case 'Members':
+      return AdminCreateMemberDialog(
+        nameController: nameController,
+      );
+    case 'Ranks':
+      return AdminCreateRankDialog(
+        rankController: rankController,
+      );
+    case 'Actions':
     default:
       return;
   }

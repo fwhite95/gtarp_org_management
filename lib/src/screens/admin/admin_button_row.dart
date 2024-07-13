@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:org_management/constants.dart';
 import 'package:org_management/src/blocs/admin/admin_bloc.dart';
 import 'package:org_management/src/blocs/dashboard/dashboard_bloc.dart';
+import 'package:org_management/src/screens/admin/dialog/admin_create_member_dialog.dart';
+import 'package:org_management/src/screens/dashboard/components/dialog/dialog_widget.dart';
 
 class AdminButtonRow extends StatefulWidget {
   const AdminButtonRow({super.key});
@@ -16,6 +18,7 @@ class _AdminButtonRowState extends State<AdminButtonRow> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController controller = TextEditingController();
     return Column(
       children: [
         Row(
@@ -32,7 +35,20 @@ class _AdminButtonRowState extends State<AdminButtonRow> {
                   vertical: defaultPadding,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                // showDialog<String>(
+                //     context: context,
+                //     builder: (BuildContext context) {
+                //       return AdminCreateMemberDialog(
+                //         nameController: controller,
+                //       );
+                //     });
+                showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return getAdminDialog(context);
+                    });
+              },
               icon: const Icon(Icons.add),
               label: const Text("Add New"),
             ),
@@ -52,7 +68,8 @@ class _AdminButtonRowState extends State<AdminButtonRow> {
               onPressed: () {
                 selection = 'Members';
                 context.read<AdminBloc>().add(AdminLoadMembers(
-                    context.read<DashboardBloc>().state.organization));
+                    context.read<DashboardBloc>().state.organization,
+                    selection));
               },
               icon: const Icon(Icons.people),
               label: const Text("Members"),
@@ -68,7 +85,8 @@ class _AdminButtonRowState extends State<AdminButtonRow> {
                 selection = 'Ranks';
 
                 context.read<AdminBloc>().add(AdminLoadRanks(
-                    context.read<DashboardBloc>().state.organization));
+                    context.read<DashboardBloc>().state.organization,
+                    selection));
               },
               icon: const Icon(Icons.people),
               label: const Text("Ranks"),
@@ -83,7 +101,8 @@ class _AdminButtonRowState extends State<AdminButtonRow> {
               onPressed: () {
                 selection = 'Actions';
                 context.read<AdminBloc>().add(AdminLoadActions(
-                    context.read<DashboardBloc>().state.organization));
+                    context.read<DashboardBloc>().state.organization,
+                    selection));
               },
               icon: const Icon(Icons.people),
               label: const Text("Actions"),
