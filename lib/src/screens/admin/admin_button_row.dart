@@ -34,13 +34,6 @@ class _AdminButtonRowState extends State<AdminButtonRow> {
                 ),
               ),
               onPressed: () {
-                // showDialog<String>(
-                //     context: context,
-                //     builder: (BuildContext context) {
-                //       return AdminCreateMemberDialog(
-                //         nameController: controller,
-                //       );
-                //     });
                 showDialog<String>(
                     context: context,
                     builder: (BuildContext context) {

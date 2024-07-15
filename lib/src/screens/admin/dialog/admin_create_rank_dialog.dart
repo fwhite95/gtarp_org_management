@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:models/models.dart';
 import 'package:org_management/src/blocs/admin/admin_bloc.dart';
 import 'package:org_management/src/blocs/dialog/dialog_cubit.dart';
 import 'package:org_management/src/screens/dashboard/components/dialog/dialog_text_field.dart';
-import 'package:uuid/uuid.dart';
 
 class AdminCreateRankDialog extends StatefulWidget {
   const AdminCreateRankDialog({

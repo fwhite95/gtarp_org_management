@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:models/models.dart';
 import 'package:org_management/src/blocs/admin/admin_bloc.dart';
 import 'package:org_management/src/blocs/dialog/dialog_cubit.dart';
 import 'package:org_management/src/screens/dashboard/components/dialog/dialog_text_field.dart';
@@ -47,17 +46,12 @@ class _AdminRankDialogState extends State<AdminRankDialog> {
         actions: [
           TextButton(
             onPressed: () {
-              // widget.nameController.text = widget.member.name;
-              // context.read<DialogCubit>().nameReset(widget.member.name);
-              print(widget.rankController.text);
               Navigator.pop(context, 'Cancel');
             },
             child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () {
-              print(widget.rankController.text);
-
               context.read<AdminBloc>().add(AdminSaveRankEvent(
                     state.rank,
                     widget.index,
