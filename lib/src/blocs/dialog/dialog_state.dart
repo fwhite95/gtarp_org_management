@@ -22,6 +22,9 @@ class DialogState extends Equatable {
     required this.status,
     required this.bottles,
     required this.objects,
+    required this.action,
+    required this.crime,
+    required this.percentage,
   });
 
   final String name;
@@ -37,6 +40,9 @@ class DialogState extends Equatable {
   final DialogStatus status;
   final String bottles;
   final String objects;
+  final String action;
+  final String crime;
+  final String percentage;
 
   factory DialogState.initial() {
     return const DialogState(
@@ -53,6 +59,9 @@ class DialogState extends Equatable {
       heistAction: '',
       theftAction: '',
       cleaningAction: '',
+      crime: '',
+      action: '',
+      percentage: '',
     );
   }
 
@@ -70,6 +79,9 @@ class DialogState extends Equatable {
     DialogStatus? status,
     String? bottles,
     String? objects,
+    String? crime,
+    String? action,
+    String? percentage,
   }) {
     return DialogState(
       name: name ?? this.name,
@@ -85,6 +97,9 @@ class DialogState extends Equatable {
       heistAction: heistAction ?? this.heistAction,
       theftAction: theftAction ?? this.theftAction,
       cleaningAction: cleaningAction ?? this.cleaningAction,
+      crime: crime ?? this.crime,
+      action: action ?? this.action,
+      percentage: percentage ?? this.percentage,
     );
   }
 
@@ -103,5 +118,8 @@ class DialogState extends Equatable {
         theftAction,
         cleaningAction,
         objects,
+        crime,
+        action,
+        percentage,
       ];
 }

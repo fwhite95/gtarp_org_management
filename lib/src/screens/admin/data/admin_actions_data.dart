@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:models/models.dart';
 import 'package:org_management/constants.dart';
+import 'package:org_management/src/screens/admin/dialog/admin_action_dialog.dart';
 
 class AdminActionsData extends StatelessWidget {
   const AdminActionsData({
@@ -48,7 +49,7 @@ class AdminActionsData extends StatelessWidget {
               ],
               rows: List.generate(
                 actions.length,
-                (index) => itemsDataRow(actions[index]),
+                (index) => itemsDataRow(actions[index], context, index),
               ),
             ),
           ),
@@ -57,7 +58,12 @@ class AdminActionsData extends StatelessWidget {
     );
   }
 
-  DataRow itemsDataRow(CrimeAction action) {
+  DataRow itemsDataRow(
+      CrimeAction crimeAction, BuildContext context, int index) {
+    TextEditingController actionController =
+        TextEditingController(text: crimeAction.action);
+    TextEditingController percentageController =
+        TextEditingController(text: crimeAction.percentage.toString());
     return DataRow(
       cells: [
         DataCell(
@@ -65,16 +71,27 @@ class AdminActionsData extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-                child: Text(action.crime),
+                child: Text(crimeAction.crime),
               ),
             ],
           ),
         ),
-        DataCell(Text(action.action)),
-        DataCell(Text(action.percentage.toString())),
+        DataCell(Text(crimeAction.action)),
+        DataCell(Text(crimeAction.percentage.toString())),
         DataCell(
           const Icon(Icons.edit),
-          onTap: () {},
+          onTap: () {
+            showDialog<String>(
+                context: context,
+                builder: (BuildContext context) {
+                  return AdminActionDialog(
+                    crimeAction: crimeAction,
+                    actionController: actionController,
+                    percentageController: percentageController,
+                    index: index,
+                  );
+                });
+          },
         ),
         DataCell(
           const Icon(Icons.delete),

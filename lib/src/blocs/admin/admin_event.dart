@@ -101,3 +101,30 @@ class AdminCreateRankEvent extends AdminEvent {
         rank,
       ];
 }
+
+class AdminSaveCrimeActionEvent extends AdminEvent {
+  const AdminSaveCrimeActionEvent(
+    this.crimeAction,
+    this.index,
+  );
+  final CrimeAction crimeAction;
+  final int index;
+
+  @override
+  List<Object> get props => [
+        crimeAction,
+        index,
+      ];
+}
+
+class AdminCreateCrimeActionEvent extends AdminEvent {
+  const AdminCreateCrimeActionEvent(
+    this.crimeAction,
+  );
+  final CrimeAction crimeAction;
+
+  @override
+  List<Object> get props => [
+        crimeAction,
+      ];
+}

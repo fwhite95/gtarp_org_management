@@ -74,8 +74,6 @@ class _AdminCreateMemberDialogDialogState
         actions: [
           TextButton(
             onPressed: () {
-              // widget.nameController.text = widget.member.name;
-              // context.read<DialogCubit>().nameReset(widget.member.name);
               print(widget.nameController.text);
               Navigator.pop(context, 'Cancel');
             },

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
 import 'package:org_management/src/blocs/admin/admin_bloc.dart';
 import 'package:org_management/src/blocs/dashboard/dashboard_bloc.dart';
+import 'package:org_management/src/screens/admin/dialog/admin_create_crimeaction_dialog.dart';
 import 'package:org_management/src/screens/admin/dialog/admin_create_member_dialog.dart';
 import 'package:org_management/src/screens/admin/dialog/admin_create_rank_dialog.dart';
 import 'package:org_management/src/screens/dashboard/components/dialog/cleaning_dialog.dart';
@@ -68,9 +69,13 @@ getDialog(BuildContext context, Organization org) {
   }
 }
 
-getAdminDialog(BuildContext context,) {
+getAdminDialog(
+  BuildContext context,
+) {
   TextEditingController nameController = TextEditingController();
   TextEditingController rankController = TextEditingController();
+  TextEditingController actionController = TextEditingController();
+  TextEditingController percentageController = TextEditingController();
   final String selection = context.read<AdminBloc>().state.selection;
 
   switch (selection) {
@@ -83,6 +88,10 @@ getAdminDialog(BuildContext context,) {
         rankController: rankController,
       );
     case 'Actions':
+      return AdminCreateCrimeActionDialog(
+        actionController: actionController,
+        percentageController: percentageController,
+      );
     default:
       return;
   }

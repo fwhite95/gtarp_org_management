@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:org_management/constants.dart';
 import 'package:org_management/src/blocs/admin/admin_bloc.dart';
 import 'package:org_management/src/blocs/dashboard/dashboard_bloc.dart';
-import 'package:org_management/src/screens/admin/dialog/admin_create_member_dialog.dart';
 import 'package:org_management/src/screens/dashboard/components/dialog/dialog_widget.dart';
 
 class AdminButtonRow extends StatefulWidget {
@@ -18,7 +17,6 @@ class _AdminButtonRowState extends State<AdminButtonRow> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller = TextEditingController();
     return Column(
       children: [
         Row(

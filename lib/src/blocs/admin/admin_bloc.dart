@@ -21,6 +21,8 @@ class AdminBloc extends Bloc<AdminEvent, AdminState> {
     on<AdminCreateMemberEvent>(_onCreateMember);
     on<AdminSaveRankEvent>(_onSaveRank);
     on<AdminCreateRankEvent>(_onCreateRank);
+    on<AdminSaveCrimeActionEvent>(_onSaveCrimeAction);
+    on<AdminCreateCrimeActionEvent>(_onCreateCrimeAction);
   }
 
   Future<void> _onLoadEvent(
@@ -166,6 +168,46 @@ class AdminBloc extends Bloc<AdminEvent, AdminState> {
 
       emit(state.copyWith(
         status: AdminStatus.ranks,
+        organization: state.organization,
+      ));
+    } catch (e) {
+      print('AdminBloc error: $e');
+      emit(state.copyWith(status: AdminStatus.error));
+    }
+  }
+
+  Future<void> _onSaveCrimeAction(
+    AdminSaveCrimeActionEvent event,
+    Emitter<AdminState> emit,
+  ) async {
+    emit(state.copyWith(status: AdminStatus.loading));
+
+    try {
+      state.organization.crimeActions[event.index] = event.crimeAction;
+      await _organizationRepository.updateOrganization(state.organization);
+
+      emit(state.copyWith(
+        status: AdminStatus.actions,
+        organization: state.organization,
+      ));
+    } catch (e) {
+      print('AdminBloc error: $e');
+      emit(state.copyWith(status: AdminStatus.error));
+    }
+  }
+
+  Future<void> _onCreateCrimeAction(
+    AdminCreateCrimeActionEvent event,
+    Emitter<AdminState> emit,
+  ) async {
+    emit(state.copyWith(status: AdminStatus.loading));
+
+    try {
+      state.organization.crimeActions.add(event.crimeAction);
+      await _organizationRepository.updateOrganization(state.organization);
+
+      emit(state.copyWith(
+        status: AdminStatus.actions,
         organization: state.organization,
       ));
     } catch (e) {

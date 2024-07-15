@@ -77,4 +77,16 @@ class DialogCubit extends Cubit<DialogState> {
   void peopleWidgetChanged() {
     emit(state.copyWith(status: DialogStatus.initial));
   }
+
+  void crimeChanged(String value) {
+    emit(state.copyWith(crime: value, status: DialogStatus.initial));
+  }
+
+  void actionChanged(String value) {
+    emit(state.copyWith(action: value, status: DialogStatus.initial));
+  }
+
+  void percentageChanged(String value) {
+    emit(state.copyWith(percentage: value, status: DialogStatus.initial));
+  }
 }
