@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:org_management/constants.dart';
+import 'package:org_management/src/blocs/admin/admin_bloc.dart';
 import 'package:org_management/src/screens/admin/dialog/admin_rank_dialog.dart';
 
 class AdminRanksData extends StatelessWidget {
@@ -81,7 +83,9 @@ class AdminRanksData extends StatelessWidget {
         ),
         DataCell(
           const Icon(Icons.delete),
-          onTap: () {},
+          onTap: () {
+            context.read<AdminBloc>().add(AdminDeleteRankEvent(rank));
+          },
         ),
       ],
     );

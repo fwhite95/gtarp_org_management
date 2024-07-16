@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
 import 'package:org_management/constants.dart';
+import 'package:org_management/src/blocs/admin/admin_bloc.dart';
 import 'package:org_management/src/screens/admin/dialog/admin_member_dialog.dart';
 
 class AdminMembersData extends StatefulWidget {
@@ -91,7 +93,9 @@ class _AdminMembersDataState extends State<AdminMembersData> {
         ),
         DataCell(
           const Icon(Icons.delete),
-          onTap: () {},
+          onTap: () {
+            context.read<AdminBloc>().add(AdminDeleteMemberEvent(member));
+          },
         ),
       ],
     );

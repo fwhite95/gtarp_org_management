@@ -26,28 +26,6 @@ class AdminLoadMembers extends AdminEvent {
   List<Object> get props => [organization, selection];
 }
 
-class AdminLoadRanks extends AdminEvent {
-  const AdminLoadRanks(this.organization, this.selection);
-  final Organization organization;
-  final String selection;
-
-  @override
-  List<Object> get props => [
-        organization,
-      ];
-}
-
-class AdminLoadActions extends AdminEvent {
-  const AdminLoadActions(this.organization, this.selection);
-  final Organization organization;
-  final String selection;
-
-  @override
-  List<Object> get props => [
-        organization,
-      ];
-}
-
 class AdminSaveMemberEvent extends AdminEvent {
   const AdminSaveMemberEvent(
     this.member,
@@ -63,6 +41,18 @@ class AdminSaveMemberEvent extends AdminEvent {
       ];
 }
 
+class AdminDeleteMemberEvent extends AdminEvent {
+  const AdminDeleteMemberEvent(
+    this.member,
+  );
+  final Member member;
+
+  @override
+  List<Object> get props => [
+        member,
+      ];
+}
+
 class AdminCreateMemberEvent extends AdminEvent {
   const AdminCreateMemberEvent(
     this.member,
@@ -72,6 +62,17 @@ class AdminCreateMemberEvent extends AdminEvent {
   @override
   List<Object> get props => [
         member,
+      ];
+}
+
+class AdminLoadRanks extends AdminEvent {
+  const AdminLoadRanks(this.organization, this.selection);
+  final Organization organization;
+  final String selection;
+
+  @override
+  List<Object> get props => [
+        organization,
       ];
 }
 
@@ -102,6 +103,29 @@ class AdminCreateRankEvent extends AdminEvent {
       ];
 }
 
+class AdminDeleteRankEvent extends AdminEvent {
+  const AdminDeleteRankEvent(
+    this.rank,
+  );
+  final String rank;
+
+  @override
+  List<Object> get props => [
+        rank,
+      ];
+}
+
+class AdminLoadActions extends AdminEvent {
+  const AdminLoadActions(this.organization, this.selection);
+  final Organization organization;
+  final String selection;
+
+  @override
+  List<Object> get props => [
+        organization,
+      ];
+}
+
 class AdminSaveCrimeActionEvent extends AdminEvent {
   const AdminSaveCrimeActionEvent(
     this.crimeAction,
@@ -119,6 +143,18 @@ class AdminSaveCrimeActionEvent extends AdminEvent {
 
 class AdminCreateCrimeActionEvent extends AdminEvent {
   const AdminCreateCrimeActionEvent(
+    this.crimeAction,
+  );
+  final CrimeAction crimeAction;
+
+  @override
+  List<Object> get props => [
+        crimeAction,
+      ];
+}
+
+class AdminDeleteCrimeActionEvent extends AdminEvent {
+  const AdminDeleteCrimeActionEvent(
     this.crimeAction,
   );
   final CrimeAction crimeAction;
