@@ -10,6 +10,8 @@ enum DialogStatus {
 class DialogState extends Equatable {
   const DialogState({
     required this.name,
+    required this.cook,
+    required this.farmer,
     required this.rank,
     required this.weedAction,
     required this.moonshineAction,
@@ -28,6 +30,8 @@ class DialogState extends Equatable {
   });
 
   final String name;
+  final String cook;
+  final String farmer;
   final String rank;
   final String weedAction;
   final String moonshineAction;
@@ -47,6 +51,8 @@ class DialogState extends Equatable {
   factory DialogState.initial() {
     return const DialogState(
       name: '',
+      cook: '',
+      farmer: '',
       rank: '',
       weedAction: '',
       bags: '',
@@ -67,6 +73,8 @@ class DialogState extends Equatable {
 
   DialogState copyWith({
     String? name,
+    String? cook,
+    String? farmer,
     String? rank,
     String? weedAction,
     String? moonshineAction,
@@ -85,6 +93,8 @@ class DialogState extends Equatable {
   }) {
     return DialogState(
       name: name ?? this.name,
+      cook: cook ?? this.cook,
+      farmer: farmer ?? this.farmer,
       rank: rank ?? this.rank,
       weedAction: weedAction ?? this.weedAction,
       bags: bags ?? this.bags,
@@ -106,6 +116,8 @@ class DialogState extends Equatable {
   @override
   List<Object> get props => [
         name,
+        cook,
+        farmer,
         rank,
         weedAction,
         bags,

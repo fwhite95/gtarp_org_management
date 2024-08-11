@@ -52,6 +52,12 @@ class WeedStats extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
+              Text('Total dirty: ${state.totalDirtyEarned}'),
+              Text('Total gross profit: ${state.totalGrossProfit}'),
+              Text('Total kickback: ${state.totalKickback}'),
+              const SizedBox(
+                height: 20,
+              ),
               AspectRatio(
                 aspectRatio: 2,
                 child: Padding(
@@ -124,15 +130,5 @@ class WeedStats extends StatelessWidget {
         );
       },
     );
-  }
-
-  List<ScatterSpot> testData() {
-    return [
-      ScatterSpot(20, 14.5,
-          dotPainter: FlDotCirclePainter(
-            color:
-                (Random().nextInt(100) % 2) != 2 ? Colors.blue : Colors.purple,
-          )),
-    ];
   }
 }

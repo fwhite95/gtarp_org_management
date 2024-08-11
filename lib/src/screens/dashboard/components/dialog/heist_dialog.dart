@@ -294,6 +294,11 @@ class _HeistAlertDialogState extends State<HeistAlertDialog> {
             TextButton(
               onPressed: () {
                 print(state);
+                final list = context
+                    .read<DashboardBloc>()
+                    .state
+                    .organization
+                    .crimeActions;
                 HeistActivity heistActivity = HeistActivity(
                   crimeId: widget.uuid.v4(),
                   activity: state.heistAction,
@@ -302,7 +307,7 @@ class _HeistAlertDialogState extends State<HeistAlertDialog> {
                   date: DateTime.now(),
                   produced: state.money,
                   people: state.people,
-                  percentage: Data.getPercentage(context, state.heistAction),
+                  percentage: Data.getPercentage(list, state.heistAction),
                   money: state.money,
                 );
                 print(heistActivity);

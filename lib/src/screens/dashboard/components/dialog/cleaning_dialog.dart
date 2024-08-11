@@ -294,6 +294,11 @@ class _CleaningAlertDialogState extends State<CleaningAlertDialog> {
             TextButton(
               onPressed: () {
                 print(state);
+                final list = context
+                    .read<DashboardBloc>()
+                    .state
+                    .organization
+                    .crimeActions;
                 CleaningActivity cleaningActivity = CleaningActivity(
                   crimeId: widget.uuid.v4(),
                   activity: state.cleaningAction,
@@ -302,7 +307,7 @@ class _CleaningAlertDialogState extends State<CleaningAlertDialog> {
                   date: DateTime.now(),
                   produced: state.money,
                   people: state.people,
-                  percentage: Data.getPercentage(context, state.cleaningAction),
+                  percentage: Data.getPercentage(list, state.cleaningAction),
                   money: state.money,
                 );
                 print(cleaningActivity);

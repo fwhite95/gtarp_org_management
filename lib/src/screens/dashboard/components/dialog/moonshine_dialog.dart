@@ -105,6 +105,110 @@ class _MoonshineAlertDialogState extends State<MoonshineAlertDialog> {
     );
   }
 
+  Widget getCookWidget(
+    BuildContext context,
+    List<String> nameList,
+  ) {
+    return Autocomplete<String>(
+      optionsBuilder: (textEditingValue) {
+        if (textEditingValue.text == '') {
+          return const Iterable<String>.empty();
+        }
+        return nameList.where((String option) {
+          return option
+              .toLowerCase()
+              .contains(textEditingValue.text.toLowerCase());
+        });
+      },
+      onSelected: (String selection) {
+        context.read<DialogCubit>().cookChanged(selection);
+        // Member member = widget.organization.members
+        //     .firstWhere((element) => element.name == selection);
+        // context.read<DialogCubit>().rankChanged(member.rank);
+      },
+      optionsViewBuilder: (context, onSelected, options) {
+        return Align(
+          alignment: Alignment.topLeft,
+          child: Material(
+            elevation: 4,
+            child: SizedBox(
+              height: 232,
+              width: 232,
+              child: ListView.separated(
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                itemBuilder: (context, index) {
+                  final option = options.elementAt(index);
+
+                  return ListTile(
+                    title: Text(option),
+                    onTap: () {
+                      onSelected(option);
+                    },
+                  );
+                },
+                separatorBuilder: (context, index) => const Divider(),
+                itemCount: options.length,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget getFarmerWidget(
+    BuildContext context,
+    List<String> nameList,
+  ) {
+    return Autocomplete<String>(
+      optionsBuilder: (textEditingValue) {
+        if (textEditingValue.text == '') {
+          return const Iterable<String>.empty();
+        }
+        return nameList.where((String option) {
+          return option
+              .toLowerCase()
+              .contains(textEditingValue.text.toLowerCase());
+        });
+      },
+      onSelected: (String selection) {
+        context.read<DialogCubit>().farmerChanged(selection);
+        // Member member = widget.organization.members
+        //     .firstWhere((element) => element.name == selection);
+        // context.read<DialogCubit>().rankChanged(member.rank);
+      },
+      optionsViewBuilder: (context, onSelected, options) {
+        return Align(
+          alignment: Alignment.topLeft,
+          child: Material(
+            elevation: 4,
+            child: SizedBox(
+              height: 232,
+              width: 232,
+              child: ListView.separated(
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                itemBuilder: (context, index) {
+                  final option = options.elementAt(index);
+
+                  return ListTile(
+                    title: Text(option),
+                    onTap: () {
+                      onSelected(option);
+                    },
+                  );
+                },
+                separatorBuilder: (context, index) => const Divider(),
+                itemCount: options.length,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   Widget getRankWidget(DialogState state) {
     return SizedBox(
       width: double.infinity,
@@ -148,84 +252,6 @@ class _MoonshineAlertDialogState extends State<MoonshineAlertDialog> {
     );
   }
 
-  Widget getPeopleWidget(List<String> nameList) {
-    return Container(
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: Colors.grey,
-          ),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          const Text('Add People: '),
-          const SizedBox(
-            height: 15,
-          ),
-          IconButton(
-            onPressed: () {
-              // Add people
-              setState(() {
-                list.add(
-                  Autocomplete<String>(
-                    optionsBuilder: (textEditingValue) {
-                      if (textEditingValue.text == '') {
-                        return const Iterable<String>.empty();
-                      }
-                      return nameList.where((String option) {
-                        return option
-                            .toLowerCase()
-                            .contains(textEditingValue.text.toLowerCase());
-                      });
-                    },
-                    onSelected: (String selection) {
-                      context.read<DialogCubit>().peopleChanged(selection);
-                    },
-                    optionsViewBuilder: (context, onSelected, options) {
-                      return Align(
-                        alignment: Alignment.topLeft,
-                        child: Material(
-                          elevation: 4,
-                          child: SizedBox(
-                            height: 232,
-                            width: 232,
-                            child: ListView.separated(
-                              shrinkWrap: true,
-                              padding: EdgeInsets.zero,
-                              itemBuilder: (context, index) {
-                                final option = options.elementAt(index);
-
-                                return ListTile(
-                                  title: Text(option),
-                                  onTap: () {
-                                    onSelected(option);
-                                  },
-                                );
-                              },
-                              separatorBuilder: (context, index) =>
-                                  const Divider(),
-                              itemCount: options.length,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                );
-              });
-
-              context.read<DialogCubit>().peopleWidgetChanged();
-              print(list);
-            },
-            icon: const Icon(Icons.add),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DialogCubit, DialogState>(
@@ -244,10 +270,12 @@ class _MoonshineAlertDialogState extends State<MoonshineAlertDialog> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Repace textformfied with DropdownButton
+                  const Text('Name: '),
                   getNameWidget(context, nameList),
                   const SizedBox(
                     height: 15,
                   ),
+
                   getRankWidget(state),
                   const SizedBox(
                     height: 15,
@@ -265,17 +293,13 @@ class _MoonshineAlertDialogState extends State<MoonshineAlertDialog> {
                   const SizedBox(
                     height: 15,
                   ),
-                  // Add people
-                  // IconButton either creates new popup with list of people
-                  // Or I create a new TextFormField to type/search
-                  getPeopleWidget(nameList),
-                  // Percentage
+                  const Text('Cook: '),
+                  getCookWidget(context, nameList),
                   const SizedBox(
                     height: 15,
                   ),
-                  Column(
-                    children: list,
-                  ),
+                  const Text('Farmer: '),
+                  getFarmerWidget(context, nameList),
                   const SizedBox(
                     height: 15,
                   ),
@@ -291,7 +315,6 @@ class _MoonshineAlertDialogState extends State<MoonshineAlertDialog> {
           actions: [
             TextButton(
               onPressed: () {
-                context.read<DialogCubit>().peopleReset();
                 Navigator.pop(context, 'Cancel');
               },
               child: const Text('Cancel'),
@@ -299,6 +322,11 @@ class _MoonshineAlertDialogState extends State<MoonshineAlertDialog> {
             TextButton(
               onPressed: () {
                 print(state);
+                final list = context
+                    .read<DashboardBloc>()
+                    .state
+                    .organization
+                    .crimeActions;
                 MoonshineActivity moonshineActivity = MoonshineActivity(
                   crimeId: widget.uuid.v4(),
                   activity: state.moonshineAction,
@@ -307,9 +335,9 @@ class _MoonshineAlertDialogState extends State<MoonshineAlertDialog> {
                   date: DateTime.now(),
                   produced: state.bottles,
                   bottles: state.bottles,
-                  people: state.people,
-                  percentage:
-                      Data.getPercentage(context, state.moonshineAction),
+                  cook: state.cook,
+                  farmer: state.farmer,
+                  percentage: Data.getPercentage(list, state.moonshineAction),
                   money: state.money,
                 );
                 print(moonshineActivity);

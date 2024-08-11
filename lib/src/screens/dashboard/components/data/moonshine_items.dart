@@ -48,7 +48,10 @@ class MoonshineItems extends StatelessWidget {
                   label: Text("Money"),
                 ),
                 DataColumn(
-                  label: Text("People"),
+                  label: Text("Cook"),
+                ),
+                DataColumn(
+                  label: Text("Farmer"),
                 ),
                 DataColumn(
                   label: Text("Percentage"),
@@ -78,7 +81,8 @@ DataRow recentFileDataRow(MoonshineActivity crime, BuildContext context) {
           Text('${crime.date.month}/${crime.date.day}/${crime.date.year}')),
       DataCell(Text(crime.bottles)),
       DataCell(Text(crime.money)),
-      DataCell(Text(crime.people.toString())),
+      DataCell(Text(crime.cook)),
+      DataCell(Text(crime.farmer)),
       DataCell(Text(crime.percentage)),
       DataCell(
         const Icon(Icons.delete),

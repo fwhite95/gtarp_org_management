@@ -16,6 +16,8 @@ import 'package:org_management/src/repositories/organization_repository.dart';
 import 'package:org_management/src/repositories/theft_repository.dart';
 import 'package:org_management/src/repositories/weed_repository.dart';
 
+import 'blocs/moonshine_stats/moonshine_stats_bloc.dart';
+
 class MyApp extends StatelessWidget {
   const MyApp({
     required this.weedRepository,
@@ -63,6 +65,12 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => WeedStatsBloc(
               weedRepository: context.read<WeedRepository>(),
+              organizationRepository: context.read<OrganizationRepository>(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => MoonshineStatsBloc(
+              moonshineRepository: context.read<MoonshineRepository>(),
               organizationRepository: context.read<OrganizationRepository>(),
             ),
           ),

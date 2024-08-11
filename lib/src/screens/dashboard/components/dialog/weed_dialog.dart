@@ -307,6 +307,11 @@ class _WeedAlertDialogState extends State<WeedAlertDialog> {
             TextButton(
               onPressed: () {
                 print('Here: $state');
+                final list = context
+                    .read<DashboardBloc>()
+                    .state
+                    .organization
+                    .crimeActions;
                 WeedActivity weedActivity = WeedActivity(
                   crimeId: widget.uuid.v4(),
                   activity: state.weedAction,
@@ -316,7 +321,7 @@ class _WeedAlertDialogState extends State<WeedAlertDialog> {
                   produced: state.bags,
                   bags: state.bags,
                   people: state.people,
-                  percentage: Data.getPercentage(context, state.weedAction),
+                  percentage: Data.getPercentage(list, state.weedAction),
                   money: state.money,
                 );
                 print(weedActivity);

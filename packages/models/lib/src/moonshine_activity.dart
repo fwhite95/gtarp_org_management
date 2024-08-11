@@ -2,9 +2,10 @@ import 'crime.dart';
 
 class MoonshineActivity extends Crime {
   final String bottles;
-  final List<String> people;
   final String percentage;
   final String money;
+  final String cook;
+  final String farmer;
 
   const MoonshineActivity({
     required super.crimeId,
@@ -14,9 +15,10 @@ class MoonshineActivity extends Crime {
     required super.date,
     required super.produced,
     required this.bottles,
-    required this.people,
     required this.percentage,
     required this.money,
+    required this.cook,
+    required this.farmer,
   });
 
   @override
@@ -28,9 +30,10 @@ class MoonshineActivity extends Crime {
     DateTime? date,
     String? produced,
     String? bottles,
-    List<String>? people,
     String? percentage,
     String? money,
+    String? cook,
+    String? farmer,
   }) {
     return MoonshineActivity(
       crimeId: crimeId ?? this.crimeId,
@@ -40,9 +43,10 @@ class MoonshineActivity extends Crime {
       date: date ?? this.date,
       produced: produced ?? this.produced,
       bottles: bottles ?? this.bottles,
-      people: people ?? this.people,
       percentage: percentage ?? this.percentage,
       money: money ?? this.money,
+      cook: cook ?? this.cook,
+      farmer: farmer ?? this.farmer,
     );
   }
 
@@ -55,9 +59,10 @@ class MoonshineActivity extends Crime {
       date: DateTime.fromMillisecondsSinceEpoch(json['date'].seconds * 1000),
       produced: json['produced'],
       bottles: json['bottles'],
-      people: json['people'].map<String>((i) => i.toString()).toList(),
       percentage: json['percentage'],
       money: json['money'],
+      cook: json['cook'],
+      farmer: json['farmer'],
     );
   }
 
@@ -71,9 +76,10 @@ class MoonshineActivity extends Crime {
       'date': date,
       'produced': produced,
       'bottles': bottles,
-      'people': people,
       'percentage': percentage,
       'money': money,
+      'cook': cook,
+      'farmer': farmer,
     };
   }
 
@@ -86,51 +92,9 @@ class MoonshineActivity extends Crime {
         date,
         bottles,
         produced,
-        people,
         percentage,
         money,
+        cook,
+        farmer,
       ];
-
-  static List<MoonshineActivity> sampleMoonshineActivity = [
-    MoonshineActivity(
-      crimeId: '123',
-      activity: 'Moonshine: Distribution',
-      name: 'Luciano',
-      rank: 'Don',
-      date: DateTime(2024, 4, 3),
-      bottles: '30',
-      people: ['Luciano', 'DeVito'],
-      percentage: '',
-      money: '',
-      produced: '30 bottles',
-    ),
-    MoonshineActivity(
-      crimeId: '456',
-      activity: 'Moonshine: Selling',
-      name: 'DeVito',
-      rank: 'Bought In',
-      date: DateTime(2024, 4, 3),
-      bottles: '30',
-      people: [
-        'DeVito',
-      ],
-      percentage: '30',
-      money: '5625',
-      produced: '30 bottles: 2500',
-    ),
-    MoonshineActivity(
-      crimeId: '789',
-      activity: 'Moonshine: Distilling',
-      name: 'Donnie',
-      rank: 'Associate',
-      date: DateTime(2024, 4, 3),
-      bottles: '100',
-      people: [
-        'Donnie',
-      ],
-      percentage: '30',
-      money: '',
-      produced: '100 bottles',
-    ),
-  ];
 }

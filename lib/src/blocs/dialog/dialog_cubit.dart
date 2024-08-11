@@ -19,6 +19,22 @@ class DialogCubit extends Cubit<DialogState> {
     emit(state.copyWith(name: value, status: DialogStatus.initial));
   }
 
+  void cookChanged(String value) {
+    emit(state.copyWith(cook: value, status: DialogStatus.initial));
+  }
+
+  void cookReset(String value) {
+    emit(state.copyWith(cook: value, status: DialogStatus.initial));
+  }
+
+  void farmerChanged(String value) {
+    emit(state.copyWith(farmer: value, status: DialogStatus.initial));
+  }
+
+  void farmerReset(String value) {
+    emit(state.copyWith(farmer: value, status: DialogStatus.initial));
+  }
+
   void rankChanged(String value) {
     emit(state.copyWith(rank: value, status: DialogStatus.initial));
   }

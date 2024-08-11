@@ -7,6 +7,7 @@ abstract class IMoonshineAPI {
   Future getMoonshineData(String orgId, String id);
   Future updateMoonshineData(String orgId, MoonshineActivity moonshineActivity);
   Future deleteMoonshineData(String orgId, String id);
+  Future getMoonshinePayWeekData(String orgId);
 }
 
 class MoonshineAPI implements IMoonshineAPI {
@@ -78,5 +79,26 @@ class MoonshineAPI implements IMoonshineAPI {
     } catch (e) {
       print(e);
     }
+  }
+
+  @override
+  Future<QuerySnapshot<Map<String, dynamic>>> getMoonshinePayWeekData(
+      String orgId) async {
+    DateTime now = DateTime.now();
+    DateTime start =
+        DateTime(now.year, now.month, now.day - (now.weekday % 5) - 7);
+    DateTime end = DateTime(now.year, now.month, start.day + 7);
+
+    print('start: $start');
+    print('end: $end');
+
+    final collection = _firestore
+        .collection('organization')
+        .doc(orgId)
+        .collection('Moonshine')
+        .where('date', isGreaterThan: start)
+        .where('date', isLessThan: end);
+
+    return collection.get();
   }
 }

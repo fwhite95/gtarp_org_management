@@ -21,12 +21,26 @@ class Data {
     return list;
   }
 
-  static String getPercentage(BuildContext context, String weedAction) {
+  // static String getPercentage(BuildContext context, String weedAction) {
+  //   int percentage = 0;
+  //   for (final c
+  //       in context.read<DashboardBloc>().state.organization.crimeActions) {
+  //     String name = '${c.crime}: ${c.action}';
+  //     if (name == weedAction) {
+  //       percentage = c.percentage;
+  //     }
+  //   }
+  //   return percentage.toString();
+  // }
+
+  static String getPercentage(
+    List<CrimeAction> crimeActionsList,
+    String crimeActionName,
+  ) {
     int percentage = 0;
-    for (final c
-        in context.read<DashboardBloc>().state.organization.crimeActions) {
+    for (final c in crimeActionsList) {
       String name = '${c.crime}: ${c.action}';
-      if (name == weedAction) {
+      if (name == crimeActionName) {
         percentage = c.percentage;
       }
     }

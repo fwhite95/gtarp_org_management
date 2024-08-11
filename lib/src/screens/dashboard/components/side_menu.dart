@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:org_management/src/blocs/admin/admin_bloc.dart';
 import 'package:org_management/src/blocs/auth/auth_cubit.dart';
 import 'package:org_management/src/blocs/dashboard/dashboard_bloc.dart';
+import 'package:org_management/src/blocs/moonshine_stats/moonshine_stats_bloc.dart';
 import 'package:org_management/src/blocs/weed_stats/weed_stats_bloc.dart';
 
 class SideMenu extends StatelessWidget {
@@ -44,7 +45,14 @@ class SideMenu extends StatelessWidget {
           DrawerListTile(
             title: 'Cooking',
             icon: Icons.task,
-            press: () {},
+            press: () {
+              context
+                  .read<MoonshineStatsBloc>()
+                  .add(const MoonshineStatsLoadPayWeekEvent());
+              context.goNamed(
+                'moonshine_stats',
+              );
+            },
           ),
           DrawerListTile(
             title: 'Mechanic',

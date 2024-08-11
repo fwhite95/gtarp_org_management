@@ -307,6 +307,11 @@ class _TheftAlertDialogState extends State<TheftAlertDialog> {
             TextButton(
               onPressed: () {
                 print(state);
+                final list = context
+                    .read<DashboardBloc>()
+                    .state
+                    .organization
+                    .crimeActions;
                 TheftActivity theftActivity = TheftActivity(
                   crimeId: widget.uuid.v4(),
                   activity: state.theftAction,
@@ -316,7 +321,7 @@ class _TheftAlertDialogState extends State<TheftAlertDialog> {
                   produced: state.money,
                   objects: state.objects,
                   people: state.people,
-                  percentage: Data.getPercentage(context, state.theftAction),
+                  percentage: Data.getPercentage(list, state.theftAction),
                   money: state.money,
                 );
                 print(theftActivity);
